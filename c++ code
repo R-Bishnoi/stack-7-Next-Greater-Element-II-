@@ -1,0 +1,59 @@
+
+//Given a circular integer array nums
+//first we try to find next grater element ahead of picked element if we find then no problem
+//if not find then circularly we check from 0 to picked element . 
+//
+
+
+// logic simple add same arr means   new arr = arr+arr;
+// and then solve this problem as previous problem next greater element  (using stack)
+//but we only store ans fron n-1 to 0   and then reverse the res vector
+
+
+
+
+
+
+
+
+class Solution {
+public:
+     
+    vector<int> nextGreaterElements(vector<int>&v) {
+     
+   int n=v.size();
+        
+        vector<int>x;
+        x=v;
+    v.insert(v.begin(), x.begin(), x.end());  
+   vector<int>res;     
+  stack<int>st;
+        
+ for(int i=2*n-1;i>=0;i--){
+ 
+     if(!st.empty()){
+  while(!st.empty()){
+      int a=st.top();
+   if(a>v[i]){
+       st.push(v[i]);
+       if(i<=n-1)res.push_back(a);
+       break;
+   }
+      st.pop();
+      
+  }   
+  }         
+         
+  
+if(st.empty()){
+     if(i<=n-1)res.push_back(-1);
+        st.push(v[i]);
+}     
+          
+ }
+        
+reverse(res.begin(),res.end()); 
+        return res;     
+    }
+       
+};
